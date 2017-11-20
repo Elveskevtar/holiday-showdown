@@ -1,0 +1,11 @@
+This is the tutorial.
+Holiday Showdown is a two to four player turn based game where each player attempts to reach
+a 150 cookies by upgrading their holiday themed store. On each player's turn they have two
+options: perform an action or perform an upgrade. There are two types of actions that you can
+perform: advertisment and sabotage. To advertise, just say 'advertise'. To sabotage, say
+'sabotage' followed by the target's name. There are three types of upgrades you can perform:
+item, store, and advertisment upgrades. Item upgrades give you more cookies per turn while
+store and advertisment upgrades help with your multiplier which adds to your cookies at the
+end of each round. More statistics about upgrade levels and multipliers can be found in the
+skill description on the Alexa app. Also, you may query about how many cookies you have, how
+much it costs to upgrade, or what your current upgrade levels are during any of your turns.

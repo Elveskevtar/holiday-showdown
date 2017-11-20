@@ -1,0 +1,73 @@
+first_step: init
+last_step: done
+default_help:
+  - "Say 'start a game' to begin, or 'tutorial' if this is your first time"
+
+steps:
+  init:
+    events:
+      launched:
+        next: main_menu
+
+  main_menu:
+    reprompt:
+      - "Sorry, I didn't understand. Say 'start a game' to begin."
+      - "Say it again, would you like to start a game?"
+    events:
+      start_game:
+        next: player_count
+      tutorial:
+        next: tutorial
+
+  tutorial:
+    events:
+      tutorial:
+        next: main_menu
+  
+  player_count:
+    help:
+      - "You can have between two and four players"
+      - "How many players are there?"
+    reprompt:
+      - "Sorry, I didn't understand. How many players are there?"
+      - "Say it again, how many players?"
+    events:
+      define_player_count:
+        next: player_names
+
+  player_names:
+    help:
+      - "Say the player's name"
+      - "What is the next player's name?"
+    reprompt:
+      - "Sorry, I didn't understand. What is the player's name?"
+      - "Say it again, I couldn't understand you."
+    events:
+      define_player_name:
+        next: player_turn
+
+  player_turn:
+    help:
+      - "You can either perform an action or an upgrade"
+      - "Say what you would like to upgrade or an action to perform"
+      - "You can ask about your current cookies or upgrade levels"
+      - "Try, 'how many cookies do I have' or 'what is my store level'"
+    reprompt:
+      - "Sorry, I didn't understand. What action would you like to take?"
+      - "Would you like to upgrade or take an action?"
+      - "Say it again, I couldn't understand you."
+    events:
+      upgrade:
+        next: player_turn
+      action:
+        next: player_turn
+      end_turn:
+        next: player_turn
+      get_stat:
+        next: player_turn
+      get_upgrade_cost:
+        next: player_turn
+      end_game:
+        next: done
+
+  done:
