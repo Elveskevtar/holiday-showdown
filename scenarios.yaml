@@ -5,6 +5,8 @@ default_help:
 
 steps:
   init:
+    reprompt:
+      - "Please launch 'Holiday Showdown' to start a game"
     events:
       launched:
         next: main_menu
@@ -16,14 +18,7 @@ steps:
     events:
       start_game:
         next: player_count
-      tutorial:
-        next: tutorial
 
-  tutorial:
-    events:
-      tutorial:
-        next: main_menu
-  
   player_count:
     help:
       - "You can have between two and four players"
