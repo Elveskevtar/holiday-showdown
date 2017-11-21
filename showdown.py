@@ -30,7 +30,8 @@ def help_user():
 @ask.launch
 @sup.guide
 def launched():
-	return question('Welcome to Holiday Showdown')
+	return question('Welcome to Holiday Showdown. Say "start a game" to begin or "tutorial"'
+					'if this is your first time')
 
 @ask.intent('TutorialIntent')
 @sup.guide
@@ -125,7 +126,7 @@ def upgrade(upgrade_type):
 		session.attributes['store_level'][player] += 1
 		session.attributes['cookie_count'][player] -= const.STORES[store_level][2]
 		session.attributes['has_upgrade'][player] = True
-		return question('Successfully upgraded store to ' + const.STORE[store_level][1])
+		return question('Successfully upgraded store to ' + const.STORES[store_level][1])
 	elif upgrade_type in const.AD_STRINGS:
 		ad_level = session.attributes['ad_level'][player]
 		if ad_level == const.ADVERTISING[-1][0]:
@@ -231,7 +232,7 @@ def get_upgrade_cost(upgrade_type):
 		return question('It costs ' + str(item[2]) + ' cookies to upgrade to ' + item[1])
 	elif upgrade_type in const.STORE_STRINGS:
 		store_level = session.attributes['store_level'][player]
-		store = const.STORE[store_level]
+		store = const.STORES[store_level]
 		return question('It costs ' + str(store[2]) + ' cookies to upgrade to a ' + store[1])
 	elif upgrade_type in const.AD_STRINGS:
 		ad_level = session.attributes['ad_level'][player]
@@ -251,6 +252,12 @@ def end_turn():
 		if leader:
 			return statement(leader[0] + ' is the winner with a total of ' +
 							 str(leader[1]) + ' cookies')
+		round_stats = ''
+		for p in range(0, player_count):
+			round_stats += (session.attributes['player_names'][p] + ' has ' +
+						    str(session.attributes['cookie_count'][p]) + ' cookies. ')
+		return question('The round is over. ' + round_stats + 'It is {}\'s turn'.format(
+			session.attributes['player_names'][player]))
 	return question('It is {}\'s turn'.format(session.attributes['player_names'][player]))
 
 def end_round():
